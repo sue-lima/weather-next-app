@@ -1,14 +1,58 @@
+'use client'
+
 import styles from './page.module.css'
-import Image from 'next/image'
-import moon from '../assets/waxingGibbous.png'
-import sunrise from '../assets/sunrise.png'
-import sunset from '../assets/sunset.png'
-import sun from '../assets/sun.png'
-import sunny from '../assets/sunny.png'
-import storm from '../assets/storm.png'
-import { FaSearch, FaLocationArrow, FaWind, FaPercent, FaCloudRain , FaMoon, FaSun} from 'react-icons/fa'
+import { Search } from '../components/Search'
+import { Forecast } from '../components/Forecast'
+import axios from 'axios'
+import { useState } from 'react';
+import { forecastType } from '../types/index'
 
 export default function Home() {
+  const apiKey = process.env.WEATHER_API_KEY;
+  const [location, setLocation] = useState("");
+  const [error, setError] = useState("");
+  const [data, setData] = useState<forecastType>({} as forecastType)
+
+  const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?include=fcst%2Cobs%2Chistfcst%2Cstats%2Ccurrent%2Chours&key=${apiKey}&options=beta&unitGroup=metric&contentType=json`)
+      .then((res) => {
+        setData(res.data)
+        setLocation("")
+        setError("")
+      })
+      .catch(error => {
+        setError(error)
+      });
+    }
+  }
+
+  let content;
+  if (Object.keys(data).length === 0 && error === "") {
+    content = (
+      <div className={styles.content}>
+        <h2>Welcome!</h2>
+        <p>Enter a city name to get the weather forecast</p>
+      </div>
+    );
+  } else if (error !== "") {
+    content = (
+      <div className={styles.content}>
+        <h2>City not found</h2>
+        <p>Please enter a valid city name</p>
+      </div>
+    );
+  } else {
+    content = (
+      <>
+        <div className={styles.content}>
+          <Forecast data={data}/>
+        </div>
+      </>
+    );
+  }
+
   return (
     <main>
       <div className={styles.bar}>
@@ -17,154 +61,9 @@ export default function Home() {
         </div>
       </div>
       <div className={styles.searchBar}>
-        <div className={styles.searchInput}>
-          <FaSearch />
-          <input type="text" placeholder='Search for a City'/>
-        </div>
+        <Search handleSearch={handleSearch} setLocation={setLocation}/>
       </div>
-      <section className={styles.secTemp}>
-        <div className={styles.containerLeft}>
-          <div className={styles.location}>
-            <FaLocationArrow />
-            <strong>São Paulo, SP</strong>
-          </div>
-          <div className={styles.temp}>
-            <h1>21°</h1>
-            <p>16° <span>9°</span></p>
-          </div>
-          <div className={styles.statist}>
-            <div className={styles.info}>
-              <FaWind />
-              <p>Wind</p>
-              <h5>17 <span>km/h</span></h5>
-            </div>
-            <div className={styles.info}>
-              <FaPercent />
-              <p>Precip</p>
-              <h5>0 <span>%</span></h5>
-            </div>
-            <div className={styles.info}>
-              <FaCloudRain />
-              <p>Rain</p>
-              <h5>17 <span>%</span></h5>
-            </div>
-          </div>
-        </div>
-        <div className={styles.containerRight}>
-            <div className={styles.sunTime}>
-              <div className={styles.title}>
-                <FaSun />
-                <strong>Sun Time</strong>
-              </div>
-              <div className={styles.time}>
-                <p>02:17 pm</p>
-              </div>
-              <div className={styles.sun}>
-                <div className={styles.sunrise}>
-                  <Image src={sunrise} alt='Sunrise' width={65} height={65}/>
-                  <p>05:45</p>
-                </div>
-                <div className={styles.sunset}>
-                  <Image src={sunset} alt='Sunset' width={65} height={65}/>
-                  <p>17:48</p>
-                </div>
-              </div>
-            </div>
-            <div className={styles.moonPhase}>
-              <div className={styles.title}>
-                <FaMoon />
-                <strong>Moon phase</strong>
-              </div>
-              <Image src={moon} alt='MoonPhase' width={147} height={151}/>
-              <p>Waxing Gibbous</p>
-            </div>
-            <div className={styles.forecast}>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Wednesday</strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                  <p>26° <span>21°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Thursday</strong>
-                  <Image src={sun} alt='Sunset' width={65} height={65}/>
-                  <p>22° <span>18°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Friday</strong>
-                  <Image src={storm} alt='Sunset' width={65} height={65}/>
-                  <p>19° <span>13°</span></p>
-                </div>
-              </div>
-            </div>
-        </div>
-      </section>
-      <section className={styles.weekly}>
-        <div className={styles.week}>
-          <div className={styles.forecast}>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Wednesday</strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                  <p>26° <span>21°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Thursday</strong>
-                  <Image src={sun} alt='Sunset' width={65} height={65}/>
-                  <p>22° <span>18°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Friday</strong>
-                  <Image src={storm} alt='Sunset' width={65} height={65}/>
-                  <p>19° <span>13°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Saturday</strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                  <p>26° <span>21°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Sunday</strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                  <p>26° <span>21°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Monday</strong>
-                  <Image src={storm} alt='Sunset' width={65} height={65}/>
-                  <p>19° <span>13°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Tuesday</strong>
-                  <Image src={storm} alt='Sunset' width={65} height={65}/>
-                  <p>19° <span>13°</span></p>
-                </div>
-              </div>
-              <div className={styles.days}>
-                <div className={styles.day}>
-                  <strong>Wednesday</strong>
-                  <Image src={storm} alt='Sunset' width={65} height={65}/>
-                  <p>19° <span>13°</span></p>
-                </div>
-              </div>
-            </div>
-        </div>
-      </section>
+      {content}
     </main>
   )
 }

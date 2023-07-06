@@ -9,6 +9,14 @@
   border-radius: 50px;
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 .searchBar input {
   background: transparent;
   border: none;
@@ -50,7 +58,13 @@
   display: flex;
   justify-content: center;
   padding-top: 50px;
-  gap: 24px;
+}
+
+.app {
+  width: 1055px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 24px;
 }
 
 .containerLeft {
@@ -73,12 +87,40 @@
   padding: 20px;
 }
 
+.temp {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+}
+
+.degrees {
+  display: flex;
+  flex-direction: column;
+}
+
+.degrees h1 {
+  font-size: 65px;
+}
+
 .statist {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
   width: 100%;
+}
+
+.info {
+  border-radius: 5px;
+  background-color: #6660c899;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
 }
 
 .containerRight {
@@ -108,6 +150,14 @@
   text-align: center;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 20px;
+}
+
 .sun {
   display: flex;
   text-align: center;
@@ -116,6 +166,12 @@
 
 .forecast {
   width: 579px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.contentWeek {
+  width: 1055px;
   display: flex;
   justify-content: space-between;
 }
@@ -131,7 +187,6 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 12px;
 }
 
 .weekly {
