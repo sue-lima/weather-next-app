@@ -8,6 +8,7 @@ import sun from '../assets/sun.png'
 import sunny from '../assets/sunny.png'
 import { FaWind, FaCloudRain , FaMoon, FaSun, FaTemperatureHigh, FaArrowUp, FaArrowDown} from 'react-icons/fa'
 import { ImLocation2, ImDroplet } from 'react-icons/im'
+import { useState } from 'react'
 
 interface ForecastProps {
   data: forecastType
@@ -18,6 +19,8 @@ export function Forecast({ data }: ForecastProps) {
   var weekly = data.days.slice(2);
   var today = data.days[0].hours
 
+  const [dayShow, setDayShow] = useState(true);
+ 
   return(
     <section className={styles.secTemp}>
       <div className={styles.app}>
@@ -95,36 +98,40 @@ export function Forecast({ data }: ForecastProps) {
                       <strong>{new Date(day.datetime).toLocaleString("en-US", { weekday: 'long' })}</strong>
                       <p>{new Date(day.datetime).toLocaleString("en-US", { month: 'long', day: 'numeric' })}</p>
                       <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                      <p>{day.tempmax.toFixed()}° <span>{day.tempmin.toFixed()}°</span></p>
+                      <p><FaArrowUp />{day.tempmax.toFixed()}° <span><FaArrowDown />{day.tempmin.toFixed()}°</span></p>
                     </div>
                   </div>
                 ))}
               </div>
           </div>
-          <button>Today</button>
-          <button>Week</button>
-          <div className={styles.contentWeek}>
-            {weekly.map((day, index) => (
-              <div className={styles.days} key={index}>
-                <div className={styles.day}>
-                  <strong>{new Date(day.datetime).toLocaleString("en-US", { weekday: 'short' })}</strong>
-                  <p>{new Date(day.datetime).toLocaleString("en-US", { month: 'short', day: 'numeric' })}</p>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
-                  <p>{day.tempmax.toFixed()}°</p>
-                  <p>{day.tempmin.toFixed()}°</p>
-                </div>
-              </div>
-            ))}
+          <div className={styles.buttons}>
+            <button onClick={() => setDayShow(true)} className={styles.buttonToday}>Today</button>
+            <button onClick={() => setDayShow(false)} className={styles.buttonWeek}>Week</button>
+          </div>
+          {dayShow ? 
+          (<div className={styles.contentWeek}>
             {today.map((today, index) => (
-              <div className={styles.days} key={index}>
-                <div className={styles.day}>
+              <div className={styles.toggleDays} key={index}>
+                <div className={styles.toggleDays}>
                   <strong>{today.datetime.slice(0, 5)}</strong>
                   <Image src={sunny} alt='Sunset' width={65} height={65}/>
                   <p>{today.temp.toFixed()}°</p>
                 </div>
               </div>
             ))}
-          </div>
+          </div>) :
+          (<div className={styles.contentWeek}>
+            {weekly.map((day, index) => (
+              <div className={styles.toggleDays} key={index}>
+                <div className={styles.toggleDays}>
+                  <strong>{new Date(day.datetime).toLocaleString("en-US", { weekday: 'short' })} - <span>{new Date(day.datetime).toLocaleString("en-US", { month: 'short', day: 'numeric' })}</span></strong>
+                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
+                  <p><FaArrowUp />{day.tempmax.toFixed()}°</p>
+                  <p><FaArrowDown />{day.tempmin.toFixed()}°</p>
+                </div>
+              </div>
+            ))}
+          </div>)}
       </div>
     </section>
   )
