@@ -1,11 +1,8 @@
 import styles from '../app/page.module.css'
 import { forecastType } from '../types/index'
 import Image from 'next/image'
-import moon from '../assets/waxingGibbous.png'
 import sunrise from '../assets/sunrise.png'
 import sunset from '../assets/sunset.png'
-import sun from '../assets/sun.png'
-import sunny from '../assets/sunny.png'
 import { FaWind, FaCloudRain , FaMoon, FaSun, FaTemperatureHigh, FaArrowUp, FaArrowDown} from 'react-icons/fa'
 import { ImLocation2, ImDroplet } from 'react-icons/im'
 import { useState } from 'react'
@@ -16,10 +13,42 @@ interface ForecastProps {
 
 export function Forecast({ data }: ForecastProps) {
   var threedays = data.days.slice(2, 5);
-  var weekly = data.days.slice(2);
+  var weekly = data.days.slice(2)
   var today = data.days[0].hours
 
   const [dayShow, setDayShow] = useState(true);
+ 
+  var moonPhase = data.currentConditions.moonphase
+  var moonPhaseName = ''
+  var moonImage = ''
+
+  if (moonPhase == 0) {
+    moonPhaseName  = 'New Moon';
+    moonImage = 'newMoon'
+  } else if (moonPhase > 0 && moonPhase < 0.25) {
+    moonPhaseName  = 'Waxing Crescent';
+    moonImage = 'waxingCrescent'
+  } else if (moonPhase == 0.25) {
+    moonPhaseName  = 'First Quarter';
+    moonImage = 'firstQater'
+  } else if (moonPhase > 0.25 && moonPhase < 0.5) {
+    moonPhaseName  = 'Waxing Gibbous';
+    moonImage = 'waxingCrescent'
+  } else if (moonPhase == 0.5) {
+    moonPhaseName  = 'Full Moon';
+    moonImage = 'waxingCrescent'
+  } else if (moonPhase > 0.5 && moonPhase < 0.75) {
+    moonPhaseName  = 'Waning Gibbous';
+    moonImage = 'waxingCrescent'
+  } else if (moonPhase == 0.75) {
+    moonPhaseName  = 'Last Quarter';
+    moonImage = 'waxingCrescent'
+  } else if (moonPhase > 0.75 && moonPhase < 1) {
+    moonPhaseName  = 'Waning Crescent';
+    moonImage = 'waxingCrescent'
+  } else {
+    moonPhaseName  = 'Moon Phase not found';
+  }
  
   return(
     <section className={styles.secTemp}>
@@ -35,7 +64,7 @@ export function Forecast({ data }: ForecastProps) {
                 <p><FaTemperatureHigh /> {data.currentConditions.feelslike.toFixed()}°C</p>
               </div>
               <div className={styles.conditions}>
-                <Image src={sun} alt='Forecast Image' width={65} height={65}/>
+                <Image src={require(`../assets/${data.currentConditions.icon}.png`)} alt='Forecast Image' width={65} height={65}/>
                 <p>{data.currentConditions.conditions}</p>
               </div>
             </div>
@@ -88,8 +117,8 @@ export function Forecast({ data }: ForecastProps) {
                   <FaMoon />
                   <span>Moon phase</span>
                 </div>
-                <Image src={moon} alt='MoonPhase' width={147} height={151}/>
-                <p>Waxing Gibbous</p>
+                <Image src={require(`../assets/${moonImage}.png`)} alt='MoonPhase' width={147} height={151}/>
+                <p>{moonPhaseName}</p>
               </div>
               <div className={styles.forecast}>
                 {threedays.map((day, index) => (
@@ -97,7 +126,7 @@ export function Forecast({ data }: ForecastProps) {
                     <div className={styles.day}>
                       <strong>{new Date(day.datetime).toLocaleString("en-US", { weekday: 'long' })}</strong>
                       <p>{new Date(day.datetime).toLocaleString("en-US", { month: 'long', day: 'numeric' })}</p>
-                      <Image src={sunny} alt='Sunset' width={65} height={65}/>
+                      <Image src={require(`../assets/${day.icon}.png`)} alt='Sunset' width={65} height={65}/>
                       <p><FaArrowUp />{day.tempmax.toFixed()}° <span><FaArrowDown />{day.tempmin.toFixed()}°</span></p>
                     </div>
                   </div>
@@ -114,7 +143,7 @@ export function Forecast({ data }: ForecastProps) {
               <div className={styles.toggleDays} key={index}>
                 <div className={styles.toggleDays}>
                   <strong>{today.datetime.slice(0, 5)}</strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
+                  <Image src={require(`../assets/${today.icon}.png`)} alt='Sunset' width={65} height={65}/>
                   <p>{today.temp.toFixed()}°</p>
                 </div>
               </div>
@@ -125,7 +154,7 @@ export function Forecast({ data }: ForecastProps) {
               <div className={styles.toggleDays} key={index}>
                 <div className={styles.toggleDays}>
                   <strong>{new Date(day.datetime).toLocaleString("en-US", { weekday: 'short' })} - <span>{new Date(day.datetime).toLocaleString("en-US", { month: 'short', day: 'numeric' })}</span></strong>
-                  <Image src={sunny} alt='Sunset' width={65} height={65}/>
+                  <Image src={require(`../assets/${day.icon}.png`)} alt='Sunset' width={65} height={65}/>
                   <p><FaArrowUp />{day.tempmax.toFixed()}°</p>
                   <p><FaArrowDown />{day.tempmin.toFixed()}°</p>
                 </div>
