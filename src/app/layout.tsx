@@ -19,10 +19,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={poppins.className}>
+        <div className='moving-clouds'></div>
         {children}
-        <div className="attribution">
-          Coded with 💙 by <a href="https://github.com/sue-lima">Sue Lima</a>
-        </div>
       </body>
     </html>
   )

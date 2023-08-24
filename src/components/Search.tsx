@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../app/page.module.css'
+import '../styles/search.css'
 import { FaSearch } from 'react-icons/fa'
 
 interface InputProps {
@@ -10,9 +10,11 @@ interface InputProps {
 
 export function Search({ handleSearch, setLocation }: InputProps) {
   return (
-    <div className={styles.searchInput}>
-      <FaSearch />
-      <input type="text" onKeyDown={handleSearch} onChange={(e) => setLocation(e.target.value)} placeholder='Search for a City'/>
+    <div className='searchBar'>
+      <div className='searchInput'>
+        <FaSearch />
+        <input type="text" onKeyDown={handleSearch} onChange={(e) => setLocation(e.target.value.toLowerCase())} placeholder='Search for a City'/>
+      </div>
     </div>
   )
 }

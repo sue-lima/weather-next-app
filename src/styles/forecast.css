@@ -1,0 +1,110 @@
+.forecastContainer {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+
+.location {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 50px;
+  width: 280px;
+}
+
+.weather {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 8px;
+}
+
+.degrees {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.degrees h1 {
+  font-size: 65px;
+}
+
+.conditions {
+  width: 112px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+
+.conditions img {
+  animation: mainImage 1.5s infinite;
+  animation-direction: alternate;
+  width: 80px;
+  height: 80px;
+}
+
+.moonPhase {
+  width: 250px;
+  background-color: rgba(197, 209, 245, 0.4);
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+[data-theme="dark"] .moonPhase {
+  background-color: rgb(47, 53, 73, 0.75);
+}
+
+.sunTime {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 250px;
+  background-color: rgba(197, 209, 245, 0.4);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 15px;
+}
+
+[data-theme="dark"] .sunTime {
+  background-color: rgb(47, 53, 73, 0.75);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sun {
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.sunrise .sunset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@keyframes mainImage {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0px, 10px);
+  }
+}

@@ -26,5 +26,6 @@ export type forecastType = {
     sunrise: string
     sunset: string
     moonphase: number
+    pressure: number
   }
 }

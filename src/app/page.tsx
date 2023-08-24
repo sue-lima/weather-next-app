@@ -1,11 +1,15 @@
 'use client'
 
 import styles from './page.module.css'
-import { Search } from '../components/Search'
-import { Forecast } from '../components/Forecast'
 import axios from 'axios'
 import { useState } from 'react';
 import { forecastType } from '../types/index'
+import { DarkMode } from '../components/DarkMode'
+import { Search } from '../components/Search'
+import { Forecast } from '../components/Forecast'
+import { Overview } from '../components/Overview'
+import { Attribution }from '../components/Attribution'
+import { ThemeProvider } from 'next-themes'
 
 export default function Home() {
   const apiKey = process.env.WEATHER_API_KEY;
@@ -28,7 +32,7 @@ export default function Home() {
     }
   }
 
-  let content;
+  var content;
   if (Object.keys(data).length === 0 && error === "") {
     content = (
       <div className={styles.content}>
@@ -46,24 +50,24 @@ export default function Home() {
   } else {
     content = (
       <>
-        <div className={styles.content}>
-          <Forecast data={data}/>
-        </div>
+        <Forecast data={data} />
+        <Overview data={data} />
       </>
     );
   }
 
   return (
-    <main>
-      <div className={styles.bar}>
-        <div className={styles.dark} title="Dark&Light mode">
-          <i className={styles.toggle}></i>
-        </div>
-      </div>
-      <div className={styles.searchBar}>
-        <Search handleSearch={handleSearch} setLocation={setLocation}/>
-      </div>
-      {content}
-    </main>
+    <ThemeProvider>
+      <header>
+        <Search handleSearch={handleSearch} setLocation={setLocation} />
+        <DarkMode />
+      </header>
+      <main>
+        {content}
+      </main>
+      <footer>
+        <Attribution />
+      </footer>
+    </ThemeProvider>
   )
 }

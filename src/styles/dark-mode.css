@@ -1,0 +1,37 @@
+.light-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: #c5d1f5;
+  color: #1e222e;
+}
+
+.light-btn:hover {
+  background: #47557a;
+  color: #d7e3e9;
+  transition: all 0.2s 0.15s ease-in-out;
+}
+
+.dark-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  background: #383e53;
+  color: #d7e3e9;
+}
+
+.dark-btn:hover {
+  background: #a2afd4;
+  color: #1e222e;
+  transition: all 0.2s 0.15s ease-in-out;
+}
