@@ -1,0 +1,37 @@
+.sunTime {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 250px;
+  background-color: rgba(197, 209, 245, 0.4);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 15px;
+}
+
+[data-theme="dark"] .sunTime {
+  background-color: rgb(47, 53, 73, 0.75);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sun {
+  display: flex;
+  text-align: center;
+  justify-content: space-evenly;
+}
+
+.sunrise .sunset {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

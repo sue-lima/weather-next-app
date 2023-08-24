@@ -29,3 +29,9 @@
 [data-theme="dark"] .searchBar input {
   color: #d7e3e9;
 }
+
+@media (max-width: 767px) {
+  .searchBar input {
+    width: 222px;
+  }
+}

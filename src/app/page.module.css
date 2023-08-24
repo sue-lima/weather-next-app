@@ -3,9 +3,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
-.content h2{
+.content h2 {
   font-size: 32px;
 }
 

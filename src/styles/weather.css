@@ -1,0 +1,42 @@
+.weather {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 8px;
+}
+
+.degrees {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.degrees h1 {
+  font-size: 65px;
+}
+
+.conditions {
+  width: 112px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+}
+
+.conditions img {
+  animation: mainImage 1.5s infinite;
+  animation-direction: alternate;
+  width: 80px;
+  height: 80px;
+}
+
+@keyframes mainImage {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0px, 10px);
+  }
+}

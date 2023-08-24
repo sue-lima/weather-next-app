@@ -1,3 +1,8 @@
 .attribution a {
   text-decoration: none;
+  color: #3c4fa0;
+}
+
+[data-theme="dark"] .attribution a {
+  color: #b3def3;
 }
