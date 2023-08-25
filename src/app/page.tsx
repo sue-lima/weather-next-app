@@ -12,6 +12,7 @@ import { Attribution }from '../components/Attribution'
 import { ThemeProvider } from 'next-themes'
 
 export default function Home() {
+  require('dotenv').config();
   const apiKey = process.env.WEATHER_API_KEY;
   const [location, setLocation] = useState("");
   const [error, setError] = useState("");
