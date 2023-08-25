@@ -30,8 +30,14 @@
   justify-content: space-evenly;
 }
 
-.sunrise .sunset {
+.sunrise {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
+}
+
+.sunset {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

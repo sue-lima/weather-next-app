@@ -9,6 +9,14 @@ interface ContentTodayProps {
 }
 
 export function ContentToday({ data }: ContentTodayProps) {
+  var rainLevel = data.currentConditions.precip
+  var newRain
+  if (rainLevel == null) {
+    newRain = 'N/A'
+  } else {
+    newRain = rainLevel
+  }
+ 
   return (
     <div className='contentToday'>
       <h2>Today's Highlight</h2>
@@ -31,7 +39,7 @@ export function ContentToday({ data }: ContentTodayProps) {
             <FaCloudRain size={30}/>
             <div className='info-content'>
               <p>Rain: </p>
-              <span>{data.currentConditions.precip} mm</span>
+              <span>{newRain} mm</span>
             </div>
         </div>
         <div className='info'>
