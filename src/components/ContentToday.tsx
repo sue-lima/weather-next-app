@@ -16,25 +16,29 @@ export function ContentToday({ data }: ContentTodayProps) {
         <div className='info'>
           <FaWind size={30}/>
           <div className='info-content'>
-            <p>Wind: <span>{data.currentConditions.windspeed} kph</span></p>
+            <p>Wind: </p>
+            <span>{data.currentConditions.windspeed} kph</span>
           </div>
         </div>
         <div className='info'>
           <ImDroplet size={30}/>
           <div className='info-content'>
-            <p>Humidity: <span>{data.currentConditions.humidity.toFixed()} %</span></p>
+            <p>Humidity: </p>
+            <span>{data.currentConditions.humidity.toFixed()} %</span>
           </div>
         </div>
         <div className='info'>
             <FaCloudRain size={30}/>
             <div className='info-content'>
-              <p>Rain: <span>{data.currentConditions.precip} mm</span></p>
+              <p>Rain: </p>
+              <span>{data.currentConditions.precip} mm</span>
             </div>
         </div>
         <div className='info'>
           <IoMdTimer size={30}/>
           <div className='info-content'>
-            <p>Pressure: <span> {data.currentConditions.pressure.toFixed()} mb</span></p>
+            <p>Pressure:</p>
+            <span>{data.currentConditions.pressure.toFixed()} mb</span>
           </div>
         </div>
       </div>

@@ -21,6 +21,12 @@
   gap: 10px;
 }
 
+.info-content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .info-content p {
   font-weight: 700;
 }
@@ -37,6 +43,12 @@
   .statist {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
   .info {
