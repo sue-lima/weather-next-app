@@ -21,7 +21,7 @@ export default function Home() {
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?include=fcst%2Cobs%2Chistfcst%2Cstats%2Ccurrent%2Chours&key=${apiKey}&options=beta&unitGroup=metric&contentType=json`)
+      axios.get(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?include=fcst%2Cobs%2Chistfcst%2Cstats%2Ccurrent%2Chours&key=72PWU3Y6MUDAFZAP2SJ8Y2QAU&options=beta&unitGroup=metric&contentType=json`)
       .then((res) => {
         setData(res.data)
         setLocation("")
