@@ -8,7 +8,7 @@
 
 ## 🔖 About
 
-Weather app is an responsive web application where you can search the weather forecast of any city in the world.
+Weather app is a responsive web application where you can search the weather forecast of any city in the world.
 
 ## 💻 Technologies
 
@@ -27,7 +27,7 @@ Weather app is an responsive web application where you can search the weather fo
 ## 🔐 Setting environment variables
 
 1. Rename the `.env.example` file to `.env` in the project.
-2. Open the `.env` file to change the existing variable by putting your personal API key and to create new variables.
+2. Open the `.env` file to change the existing variable by putting your personal API key. You can also use this file to create new variables.
 
 ## 🔑 API Key
 
