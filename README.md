@@ -36,6 +36,7 @@ Weather app is a responsive web application where you can search the weather for
 
 ## ⚙️ How to run
 
+### Locally
 ```bash
 # Enter the folder with
 $ cd weather-next-app
@@ -45,6 +46,13 @@ $ npm install
 
 # Run the application
 $ npm run dev
+```
+
+### With Docker
+
+```bash
+# Run with makefile
+$ make run
 ```
 
 ## 🚀 Demo
